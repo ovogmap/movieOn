@@ -8,8 +8,9 @@ const Navbar = styled.div`
   border-bottom: 2px solid #e60000;
   display: flex;
   justify-content: center;
-  // position: fixed;
+  position: fixed;
   background: #fff;
+  z-index: 1;
 `;
 const Inner = styled.div`
   width: 1180px;
@@ -17,6 +18,13 @@ const Inner = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  .pointbox {
+    background: #e60000;
+    box-sizing: content-box;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #fff;
+  }
 `;
 const Nav = ({ init }) => {
   return (
@@ -44,9 +52,13 @@ const Nav = ({ init }) => {
             )}
             <Li>
               {init ? (
-                <Link to="/profile">프로필</Link>
+                <Link to="/profile" className="pointbox">
+                  프로필
+                </Link>
               ) : (
-                <Link to="/auth">로그인</Link>
+                <Link to="/auth" className="pointbox">
+                  로그인
+                </Link>
               )}
             </Li>
           </Ul>

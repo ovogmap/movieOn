@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Auth from "../routes/Auth";
 import Home from "../routes/Home";
 import Search from "../routes/Search";
 import List from "../routes/List";
 import Like from "../routes/Like";
 import Profile from "../routes/Profile";
+import Detail from "../routes/Detail";
 import Nav from "./Nav";
 import { authService } from "../fbase";
 export default function AppRouter() {
@@ -50,12 +51,15 @@ export default function AppRouter() {
             <Route path="/list">
               <List />
             </Route>
+            <Route path="/detail/:id" component={Detail} />
             <Route path="/profile">
-              <Profile
-                setInit={setInit}
-                userObj={userObj}
-                refreshUser={refreshUser}
-              />
+              {userObj && (
+                <Profile
+                  setInit={setInit}
+                  userObj={userObj}
+                  refreshUser={refreshUser}
+                />
+              )}
             </Route>
             <Route path="/like">
               <Like />

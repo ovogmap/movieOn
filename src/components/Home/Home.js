@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const MainBox = styled.div`
@@ -64,14 +65,18 @@ export default function Home({ movieData, userObj }) {
           </NickName>
           <Title>{movieData.title}</Title>
           <p className="text">어떠세요?</p>
-          <More>더보기</More>
+          <Link to={`/detail/${movieData.id}`}>
+            <More>더보기</More>
+          </Link>
         </MainBox>
       ) : (
         <MainBox style={{ background: imgUrl }}>
           <NickName>{anms[index]}님,</NickName>
           <Title>{movieData.title}</Title>
           <p className="text">어떠세요?</p>
-          <More>더보기</More>
+          <Link to={`/detail/${movieData.id}`}>
+            <More>더보기</More>
+          </Link>
         </MainBox>
       )}
     </>
