@@ -17,6 +17,7 @@ const Inner = styled.div`
   .title {
     font-size: 70px;
     font-weight: 900;
+    color: #fff;
     span {
       color: #e60000;
     }

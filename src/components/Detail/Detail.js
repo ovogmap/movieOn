@@ -1,60 +1,77 @@
 import React from "react";
 import styled from "styled-components";
+import DetailCasts from "./DetailCasts";
+import DetailIntoroBg from "./DetailIntoroBg";
+import DetailIntro from "./DetailIntro";
+import DetailSimilars from "./DetailSimilars"
+import DetailVideos from "./DetailVideos";
 const Inner = styled.div`
   padding-top: 50px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 200px;
+  h2 {
+    padding: 100px 0 50px;
+  }
+  .contentbox {
+    width:1180px;
+  }
+      .poster{
+        margin-top: -150px;
+      }
+  .castsbox{
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+  }
+  .videosbox {
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+    .video {
+      border-radius: 10px;
+      width:380px;
+      height:220px;
+    }
+  }
+  .similarbox {
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+  }
 `;
-const MainBg = styled.div`
-  width: 100%;
-  height: 400px;
-  filter: grayscale(100%);
-  z-index: -10;
-`;
-function Detail({ detailMovie, casts, genres }) {
-  console.log(detailMovie);
-  console.log(detailMovie.data.title);
-  console.log(casts);
-  // const TITLE = detailMovie.data.title;
+function Detail({ detailMovie, casts, genres, videos, similars }) {
   const { backdrop_path, poster_path } = detailMovie.data;
-  const bg = `url(http://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${backdrop_path}) center / cover no-repeat`;
-  const post = `url(http://image.tmdb.org/t/p/w220_and_h330_face/${poster_path}) center / cover no-repeat`;
-
+  videos && console.log(videos)
   return (
     <>
       <Inner>
-        <MainBg
-          style={{
-            background: bg,
-          }}
-        />
-        <img
-          src={`//image.tmdb.org/t/p/w300_and_h450_bestv2/${detailMovie.data.poster_path}`}
-          alt="포스터"
-          width="280px"
-          height="400px"
-          style={{ borderRadius: "10px" }}
-        />
-        <h1>{detailMovie.data.title}</h1>
-        {genres}
-        <h6>{detailMovie.data.tagline}</h6>
-        <p>{detailMovie.data.overview}</p>
-        <div>
-          <h2>출연</h2>
-          {casts &&
-            casts.map((item) => {
-              const { id, character, name, profile_path } = item;
-              return (
-                <div key={id}>
-                  <img
-                    src={`//image.tmdb.org/t/p/w138_and_h175_face/${profile_path}`}
-                    alt="사진"
-                    width="100px"
-                    height="100px"
-                  />
-                  <h4>{name}</h4>
-                  <h6>{character} 역</h6>
-                </div>
-              );
+        <DetailIntoroBg backdrop_path={backdrop_path} poster_path={poster_path}/>
+        <div className="contentbox">
+          <DetailIntro detailMovie={detailMovie} genres={genres} />
+            <h2>출연</h2>
+          <div className="castsbox">
+            {casts &&
+              casts.map((item) => {
+                const { id, character, name, profile_path } = item;
+                return <DetailCasts id={id} character={character} name={name} profile_path={profile_path} />;
             })}
+          </div>
+            <h2>예고편</h2>
+          <div className="videosbox">
+            {videos && 
+            videos.map(video => {
+              const { key, id } = video
+              return <DetailVideos itemkey={key} id={id} />
+            })}
+          </div>
+            <h2>비슷한 영화</h2>
+          <div className="similarbox">
+            {similars && similars.map(similar=> {
+              const { title, id, poster_path } = similar
+              return <DetailSimilars title={title} id={id} poster_path={poster_path} />})}
+          </div>
         </div>
       </Inner>
     </>

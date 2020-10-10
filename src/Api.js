@@ -16,6 +16,8 @@ export default {
   getDetail: (id) => api.get(`${id}`),
   getCredits: (id) => api.get(`${id}/credits`),
   getImg: (id) => api.get(`${id}/images`),
+  getVideos: (id) => api.get(`${id}/videos`),
+  getSimilar: (id) => api.get(`${id}/similar`)
 };
 
 // https://api.themoviedb.org/3/movie/581392?api_key=https://1d3ad3a1e497c9afbe443d1443905c3f&language=ko-KR

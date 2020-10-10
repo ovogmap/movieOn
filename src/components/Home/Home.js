@@ -38,6 +38,9 @@ const More = styled.button`
   color: #fff;
   margin-top: 50px;
   cursor: pointer;
+  &:hover {
+    background: rgb(0, 0, 0, 0.5);
+  }
 `;
 export default function Home({ movieData, userObj }) {
   const [imgUrl, setImgUrl] = useState("");

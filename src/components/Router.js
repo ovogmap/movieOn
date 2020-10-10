@@ -39,31 +39,62 @@ export default function AppRouter() {
         <Nav init={init} />
         <Switch>
           <>
+          {userObj ? 
+          <>
             <Route exact path="/">
-              <Home userObj={userObj} />
-            </Route>
-            <Route path="/auth">
-              <Auth userObj={userObj} refreshUser={refreshUser} />
-            </Route>
-            <Route path="/search">
-              <Search />
-            </Route>
-            <Route path="/list">
-              <List />
-            </Route>
-            <Route path="/detail/:id" component={Detail} />
-            <Route path="/profile">
-              {userObj && (
-                <Profile
-                  setInit={setInit}
-                  userObj={userObj}
-                  refreshUser={refreshUser}
-                />
-              )}
-            </Route>
-            <Route path="/like">
-              <Like />
-            </Route>
+                <Home userObj={userObj} />
+              </Route>
+              <Route path="/auth">
+                <Auth userObj={userObj} refreshUser={refreshUser} />
+              </Route>
+              <Route path="/search">
+                <Search />
+              </Route>
+              <Route path="/list">
+                <List />
+              </Route>
+              <Route path="/detail/:id" component={Detail} />
+              <Route path="/profile">
+                {userObj && (
+                  <Profile
+                    setInit={setInit}
+                    userObj={userObj}
+                    refreshUser={refreshUser}
+                  />
+                )}
+              </Route>
+              <Route path="/like">
+                <Like />
+              </Route>
+            </>
+            : <>
+            <Route exact path="/">
+                <Home userObj={userObj} />
+              </Route>
+              <Route path="/auth">
+                <Auth userObj={userObj} refreshUser={refreshUser} />
+              </Route>
+              <Route path="/search">
+                <Search />
+              </Route>
+              <Route path="/list">
+                <List />
+              </Route>
+              <Route path="/detail/:id" component={Detail} />
+              <Route path="/profile">
+                {userObj && (
+                  <Profile
+                    setInit={setInit}
+                    userObj={userObj}
+                    refreshUser={refreshUser}
+                  />
+                )}
+              </Route>
+              <Route path="/like">
+                <Like />
+              </Route>
+            </>
+          } 
           </>
         </Switch>
       </>
