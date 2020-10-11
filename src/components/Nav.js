@@ -11,6 +11,9 @@ const Navbar = styled.div`
   position: fixed;
   background: #fff;
   z-index: 1;
+  span {
+    color: #e60000;
+  }
 `;
 const Inner = styled.div`
   width: 1180px;
@@ -40,14 +43,14 @@ const Nav = ({ init }) => {
         <nav>
           <Ul>
             <Li>
-              <Link to="/search">검색</Link>
+              <Link to="/search" onClick={()=>{ alert("아직 못만들었어요ㅠ")}}>검색</Link>
             </Li>
             <Li>
               <Link to="/list">영화리스트</Link>
             </Li>
             {init && (
               <Li>
-                <Link to="/like">좋아요리스트</Link>
+                <Link to="/like" onClick={()=>{ alert("아직 못만들었어요ㅠ")}}>좋아요리스트</Link>
               </Li>
             )}
             <Li>

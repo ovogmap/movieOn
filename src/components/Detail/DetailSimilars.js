@@ -9,13 +9,13 @@ const Similaritem = styled.img`;
 `; 
 const SimilarBox = styled.div`;
     border-radius: 10px;
-    width:300px;
-    height:400px;
+    width:250px;
+    height:350px;
     text-align: center;
 `;
 const SimilarTitle = styled.h4`;
     font-size: 26px;
-    padding-top: 30px;
+    padding-top: 20px;
 `;
 export default ({id,poster_path,title}) => {
     console.log(id)

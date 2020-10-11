@@ -13,5 +13,5 @@ export default({name}) => {
     run()
   },[onData])
 
-  return onData && <ListMore upcoming={onData} />
+  return onData && <ListMore onData={onData} name={name} />
 }

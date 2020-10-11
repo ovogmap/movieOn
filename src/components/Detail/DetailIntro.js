@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
+import { dbService } from "../../fbase";
+import { UserContext } from "../Router";
 const Intro = styled.div`
     width: 1180px;
     display: flex;
@@ -50,9 +52,48 @@ const LikeBtn = styled.button`
 
 export default ({detailMovie, genres}) => {
     const [isLike, setIsLike] = useState(false)
+    const [likeColl, setLikeColl] = useState(null)
+    const user = useContext(UserContext);
+
+    // useEffect(()=>{
+    //     dbService.collection(`${user.uid}`).onSnapshot((item) => {
+    //         const newArray = item.docs.map((doc) => ({
+    //             id: doc.id,
+    //             ...doc.data()
+    //         }))
+    //         setLikeColl(newArray)
+    //     })
+    // },[])
+
+    likeColl && console.log(likeColl)
+    console.log(likeColl)
     const onLikeToggle = () => {
         setIsLike(!isLike)
     }
+    
+    console.log(user)
+
+    const { poster_path, title, id } = detailMovie.data;
+    // const onLike = async () => {
+    //     const newLikeMovie = {
+    //         creareAt: Date.now(),
+    //         creatorId: user.uid,
+    //         likeMovietitle: title,
+    //         poster: poster_path,
+    //         movieId: id
+    //     }
+    //     await dbService.collection(`${user.uid}`).add(newLikeMovie)
+    //     onLikeToggle()
+    // }
+    // const onLikeDelete = async () => {
+    //     const num = likeColl?.map(item => {
+    //         return item.movieId
+    //     })
+    //     console.log(num)
+    //     const result = await dbService.doc(`${user.uid}/${num}`).delete()
+    //     console.log(result)
+    //     onLikeToggle()
+    // }
     return (
         <Intro>
         <PosterImg
@@ -62,7 +103,9 @@ export default ({detailMovie, genres}) => {
           <ContText>
             <IntroTitle>{detailMovie.data.title}</IntroTitle>
             <IntroGenres>{genres}</IntroGenres>
-            <LikeBtn onClick={onLikeToggle}>{!isLike ? "좋아요" : "좋아요 취소"}</LikeBtn>
+            {isLike ? <LikeBtn onClick={onLikeToggle}>좋아요취소</LikeBtn>
+            : <LikeBtn onClick={onLikeToggle}>좋아요</LikeBtn>
+            }
             <IntroLine/> 
             <IntroTagLine>{detailMovie.data.tagline}</IntroTagLine>
             <p>{detailMovie.data.overview}</p>

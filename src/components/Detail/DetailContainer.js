@@ -2,8 +2,7 @@ import React from "react";
 import Detail from "./Detail";
 import api from "../../util/Api";
 import { useEffect } from "react";
-import { useState } from "react";
-import { storeService } from "../../fbase";
+import { useState } from "react"; 
 
 function DetailContainer({ getMoiveId }) {
   const [detailMovie, setDetailMovie] = useState(null);

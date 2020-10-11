@@ -10,6 +10,9 @@ import Detail from "../routes/Detail";
 import Nav from "./Nav";
 import { authService } from "../fbase";
 import ListMore from "../routes/ListMore";
+
+export const UserContext = React.createContext();
+
 export default function AppRouter() {
   const [init, setInit] = useState(false);
   const [userObj, setUserObj] = useState(null);
@@ -33,13 +36,12 @@ export default function AppRouter() {
       updateProfile: (args) => user.updateProfile(args),
     });
   };
+  console.log(userObj)
   return (
     <Router>
       <>
         <Nav init={init} />
         <Switch>
-          <>
-          {userObj &&
           <>
             <Route exact path="/">
                 <Home userObj={userObj} />
@@ -53,8 +55,13 @@ export default function AppRouter() {
               <Route path="/list">
                 <List />
               </Route>
-              <Route path="/listmore/:name" component={ListMore} />
-              <Route path="/detail/:id" component={Detail} />
+              <UserContext.Provider value={userObj}>
+                <Route path="/detail/:id" component={Detail} />
+                <Route path="/listmore/:name" component={ListMore} />
+                <Route path="/like">
+                  <Like />
+                </Route>
+              </UserContext.Provider>
               <Route path="/profile">
                 {userObj && (
                   <Profile
@@ -64,12 +71,7 @@ export default function AppRouter() {
                   />
                 )}
               </Route>
-              <Route path="/like">
-                <Like />
-              </Route>
             </>
-            } 
-          </>
         </Switch>
       </>
     </Router>

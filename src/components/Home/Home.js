@@ -10,6 +10,7 @@ const MainBox = styled.div`
   align-items: center;
   color: #fff;
   flex-direction: column;
+  filter: grayscale(80%);
   .text {
     font-size: 60px;
     font-weight: 300;
@@ -55,7 +56,7 @@ export default function Home({ movieData, userObj }) {
   // const { displayName } = userObj;
   useEffect(() => {
     setImgUrl(
-      `url(http://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${movieData.backdrop_path}) center / cover no-repeat`
+      `url(https://image.tmdb.org/t/p/original/${movieData.backdrop_path}) center / cover no-repeat`
     );
     console.log(movieData);
   }, [movieData]);
