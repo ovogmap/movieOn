@@ -4,15 +4,12 @@ import api from "../../util/Api";
 import { useEffect } from "react";
 import { useState } from "react"; 
 
-function DetailContainer({ getMoiveId }) {
+export default({ getMoiveId }) => {
   const [detailMovie, setDetailMovie] = useState(null);
   const [genres, setGenres] = useState(null);
   const [casts, setCasts] = useState(null);
   const [videos, setVideos] = useState(null);
   const [similars,setSimilars] = useState(null);
-  // storeService.add(async () => {
-  //   const result = await 
-  // })
   const fetchDetailMovie = async () => {
     const result = await api.getDetail(getMoiveId);
     setDetailMovie(result);
@@ -61,5 +58,3 @@ function DetailContainer({ getMoiveId }) {
     </>
   );
 }
-
-export default DetailContainer;

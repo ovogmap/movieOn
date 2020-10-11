@@ -1,2 +1,2 @@
-import ListupcomingContainer from "./ListupcomingContainer"
-export {ListupcomingContainer}
+import ListMoreContainer from "./ListMoreContainer"
+export default ListMoreContainer

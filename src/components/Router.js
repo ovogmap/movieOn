@@ -52,9 +52,7 @@ export default function AppRouter() {
               <Route path="/search">
                 <Search />
               </Route>
-              <Route path="/list">
-                <List />
-              </Route>
+              <Route path="/list" component={List} />
               <UserContext.Provider value={userObj}>
                 <Route path="/detail/:id" component={Detail} />
                 <Route path="/listmore/:name" component={ListMore} />

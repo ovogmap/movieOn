@@ -1,48 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
-
-const MainBox = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  flex-direction: column;
-  filter: grayscale(80%);
-  .text {
-    font-size: 60px;
-    font-weight: 300;
-    color: #fff;
-  }
-`;
-const NickName = styled.p`
-  font-size: 50px;
-  font-weight: bold;
-  color: #fff;
-`;
-const Title = styled.p`
-  font-size: 80px;
-  font-weight: 400;
-  font-style: italic;
-  color: #fff;
-  padding: 40px 0 60px;
-`;
-const More = styled.button`
-  width: 280px;
-  height: 120px;
-  border: 10px solid #fff;
-  background: rgb(0, 0, 0, 0.2);
-  font-size: 60px;
-  font-weight: 400;
-  color: #fff;
-  margin-top: 50px;
-  cursor: pointer;
-  &:hover {
-    background: rgb(0, 0, 0, 0.5);
-  }
-`;
+import { MainBox, NickName, Title, More } from "./HomeStyle"
 export default function Home({ movieData, userObj }) {
   const [imgUrl, setImgUrl] = useState("");
   const anms = [
@@ -50,15 +8,14 @@ export default function Home({ movieData, userObj }) {
     "전설의 낚시꾼",
     "성급한 도박사",
     "배부른 대식가",
+    "기여운 효또니"
   ];
   const index = Math.floor(Math.random() * anms.length);
-  console.log(anms[index]);
-  // const { displayName } = userObj;
+
   useEffect(() => {
     setImgUrl(
       `url(https://image.tmdb.org/t/p/original/${movieData.backdrop_path}) center / cover no-repeat`
     );
-    console.log(movieData);
   }, [movieData]);
   return (
     <>

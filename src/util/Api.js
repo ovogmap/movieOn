@@ -11,6 +11,8 @@ const api = axios.create({
   },
 });
 
+export const YOUTUBE_PATH = 'https://www.youtube.com/watch?v=';
+export const THUMBNAIL_PATH = 'http://i.ytimg.com/vi/';
 
 export default {
   upcoming: () => api.get("upcoming"),
