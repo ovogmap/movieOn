@@ -87,7 +87,7 @@ const MainBox = styled.div`
   // color: #fff;
   // flex-direction: column;
 `;
-function Auth({ userObj, refreshUser }) {
+export default ({ userObj, refreshUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newAccount, setNewAccount] = useState(false);
@@ -187,5 +187,3 @@ function Auth({ userObj, refreshUser }) {
     </MainBox>
   );
 }
-
-export default Auth;

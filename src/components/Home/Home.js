@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MainBox, NickName, Title, More } from "./HomeStyle"
-export default function Home({ movieData, userObj }) {
+export default ({ movieData, userObj }) => {
   const [imgUrl, setImgUrl] = useState("");
   const anms = [
     "알수없는 여행자",
@@ -11,7 +11,6 @@ export default function Home({ movieData, userObj }) {
     "기여운 효또니"
   ];
   const index = Math.floor(Math.random() * anms.length);
-
   useEffect(() => {
     setImgUrl(
       `url(https://image.tmdb.org/t/p/original/${movieData.backdrop_path}) center / cover no-repeat`

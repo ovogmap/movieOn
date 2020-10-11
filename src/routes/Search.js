@@ -1,7 +1,5 @@
 import React from "react";
 import SearchIndex from "../components/Search/index"
-function search() {
+export default() => {
   return <SearchIndex />;
 }
-
-export default search;

@@ -10,10 +10,8 @@ const api = axios.create({
     language: "ko-KR",
   },
 });
-
 export const YOUTUBE_PATH = 'https://www.youtube.com/watch?v=';
 export const THUMBNAIL_PATH = 'http://i.ytimg.com/vi/';
-
 export default {
   upcoming: () => api.get("upcoming"),
   popular: () => api.get("popular"),

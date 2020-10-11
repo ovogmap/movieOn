@@ -48,7 +48,7 @@ const Inner = styled.div`
     }
   }
 `;
-function Profile({ userObj, setInit, refreshUser }) {
+export default({ userObj, setInit, refreshUser }) => {
   const [newDisplayName, setNewDisplayName] = useState("");
   const history = useHistory();
   const onLogOutClick = () => {
@@ -94,5 +94,3 @@ function Profile({ userObj, setInit, refreshUser }) {
     </div>
   );
 }
-
-export default Profile;
