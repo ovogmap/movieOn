@@ -1,8 +1,8 @@
 import React from "react";
 import DetailIndex from "../components/Detail/index";
-function Detail(props) {
+export default (props) => {
+  console.log(props)
   const getMoiveId = props.match.params.id;
   return <DetailIndex getMoiveId={getMoiveId} />;
 }
 
-export default Detail;

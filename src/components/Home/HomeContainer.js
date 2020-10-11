@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Home from "./Home";
-import api from "../../Api";
+import api from "../../util/Api";
 
 export default function HomeContainer({ userObj }) {
   const [movie, setMovie] = useState(null);
@@ -21,12 +21,13 @@ export default function HomeContainer({ userObj }) {
   };
   useEffect(() => {
     if (movie) {
-      console.log(movie.id);
       detailMovie();
     }
   }, [movie]);
   // console.log(movie);
   return (
-    <>{movieData ? <Home movieData={movieData} userObj={userObj} /> : <></>}</>
+    <>
+      {movieData ? <Home movieData={movieData} userObj={userObj} /> : <></>}
+    </>
   );
 }

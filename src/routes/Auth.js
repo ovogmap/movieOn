@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { authService, firebaseInstance } from "../fbase";
 import { useHistory } from "react-router-dom";
-import api from "../Api";
+import api from "../util/Api";
 import styled from "styled-components";
 const Inner = styled.div`
   padding-top: 50px;

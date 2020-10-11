@@ -43,7 +43,6 @@ const Inner = styled.div`
 `;
 function Detail({ detailMovie, casts, genres, videos, similars }) {
   const { backdrop_path, poster_path } = detailMovie.data;
-  videos && console.log(videos)
   return (
     <>
       <Inner>
@@ -55,7 +54,7 @@ function Detail({ detailMovie, casts, genres, videos, similars }) {
             {casts &&
               casts.map((item) => {
                 const { id, character, name, profile_path } = item;
-                return <DetailCasts id={id} character={character} name={name} profile_path={profile_path} />;
+                return <DetailCasts key={id} id={id} character={character} name={name} profile_path={profile_path} />;
             })}
           </div>
             <h2>예고편</h2>
@@ -63,14 +62,14 @@ function Detail({ detailMovie, casts, genres, videos, similars }) {
             {videos && 
             videos.map(video => {
               const { key, id } = video
-              return <DetailVideos itemkey={key} id={id} />
+              return <DetailVideos key={id} itemkey={key} id={id} />
             })}
           </div>
             <h2>비슷한 영화</h2>
           <div className="similarbox">
             {similars && similars.map(similar=> {
               const { title, id, poster_path } = similar
-              return <DetailSimilars title={title} id={id} poster_path={poster_path} />})}
+              return <DetailSimilars key={id} title={title} id={id} poster_path={poster_path} />})}
           </div>
         </div>
       </Inner>
