@@ -15,7 +15,7 @@ export default({ init }) => {
         <nav>
           <Ul>
             <Li>
-              <Link to="/search" onClick={()=>{ alert("아직 못만들었어요ㅠ")}}>검색</Link>
+              <Link to="/search" >검색</Link>
             </Li>
             <Li>
               <Link to="/list">영화리스트</Link>
