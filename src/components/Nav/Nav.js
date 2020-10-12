@@ -1,35 +1,7 @@
 import React from "react";
-import styled from "styled-components";
-import { Ul, Li } from "../style";
+import { Ul, Li, Navbar, Inner } from "./NavStyle";
 import { Link } from "react-router-dom";
-
-const Navbar = styled.div`
-  width: 100%;
-  border-bottom: 2px solid #e60000;
-  display: flex;
-  justify-content: center;
-  position: fixed;
-  background: #fff;
-  z-index: 1;
-  span {
-    color: #e60000;
-  }
-`;
-const Inner = styled.div`
-  width: 1180px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  .pointbox {
-    background: #e60000;
-    box-sizing: content-box;
-    padding: 5px 10px;
-    border-radius: 5px;
-    color: #fff;
-  }
-`;
-const Nav = ({ init }) => {
+export default({ init }) => {
   return (
     <Navbar>
       <Inner>
@@ -70,5 +42,3 @@ const Nav = ({ init }) => {
     </Navbar>
   );
 };
-
-export default Nav;

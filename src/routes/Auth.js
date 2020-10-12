@@ -8,6 +8,11 @@ const Inner = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align:center;
+  p {
+    color: #fff;
+    padding-bottom: 30px;
+  }
   .toggle {
     cursor: pointer;
     color: #fff;
@@ -87,9 +92,12 @@ const MainBox = styled.div`
   // color: #fff;
   // flex-direction: column;
 `;
-export default ({ userObj, refreshUser }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+export default ({ userObj, refreshUser, setNickName }) => {
+  const [addUser, setAddUser] = useState({
+    email: "",
+    password: "",
+    nickName: "",
+  })
   const [newAccount, setNewAccount] = useState(false);
   const [error, setErroe] = useState(null);
   const [movie, setMovie] = useState(null);
@@ -101,23 +109,21 @@ export default ({ userObj, refreshUser }) => {
   useEffect(() => {
     fetchMovie();
   }, []);
-  console.log(movie);
-  const bg =
-    movie &&
-    `url(http://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${movie.backdrop_path}) center / cover no-repeat`;
+  const bg = `url(http://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${movie?.backdrop_path}) center / cover no-repeat`;
   const history = useHistory();
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
       let data;
+      const { email, password, nickName } = addUser
       if (newAccount) {
         data = await authService.createUserWithEmailAndPassword(
           email,
           password
         );
-        // console.log(data.user.displayName);
-        // data.user.displayName = nickName;
+        setNickName(nickName)
         history.push("/");
+        console.log(data)
       } else {
         data = await authService.signInWithEmailAndPassword(email, password);
         console.log(data.user.displayName);
@@ -129,11 +135,10 @@ export default ({ userObj, refreshUser }) => {
   };
   const onChange = (e) => {
     const { name, value } = e.target;
-    if (name === "email") {
-      setEmail(value);
-    } else if (name === "password") {
-      setPassword(value);
-    }
+    setAddUser({
+      ...addUser,
+      [name]: value
+    })
   };
   const toggleAccount = () => {
     setNewAccount(!newAccount);
@@ -145,6 +150,7 @@ export default ({ userObj, refreshUser }) => {
   };
   return (
     <MainBox style={{ background: bg }}>
+      {/* {addUser} */}
       <Inner>
         <div className="innerbox">
           <h2 className="title">
@@ -157,7 +163,7 @@ export default ({ userObj, refreshUser }) => {
               type="text"
               placeholder="이메일을 입력해 주세요."
               required
-              value={email}
+              value={addUser.email}
               onChange={onChange}
             />
             <input
@@ -166,16 +172,28 @@ export default ({ userObj, refreshUser }) => {
               type="password"
               placeholder="비밀번호를 입력해 주세요."
               required
-              value={password}
+              value={addUser.password}
               onChange={onChange}
             />
+            {newAccount &&(<input
+              className="formitem"
+              name="nickName"
+              type="text"
+              placeholder="닉네임을 입력해 주세요"
+              required
+              value={addUser.nickName}
+              onChange={onChange}
+            />)
+
+            }
             <input
               className="change"
               type="submit"
               value={newAccount ? "회원가입 하기" : "로그인"}
             />
-            {error}
+            
           </form>
+          <p>{error && error}</p>
           <span className="toggle" onClick={toggleAccount}>
             {newAccount ? "로그인" : "회원가입 하기"}
           </span>

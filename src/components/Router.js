@@ -7,7 +7,7 @@ import List from "../routes/List";
 import Like from "../routes/Like";
 import Profile from "../routes/Profile";
 import Detail from "../routes/Detail";
-import Nav from "./Nav";
+import Nav from "./Nav/Nav"
 import { authService } from "../fbase";
 import ListMore from "../routes/ListMore";
 
@@ -16,18 +16,19 @@ export const UserContext = React.createContext();
 export default function AppRouter() {
   const [init, setInit] = useState(false);
   const [userObj, setUserObj] = useState(null);
+  const [nickName,setNickName] = useState("");
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if (user) {
         setUserObj({
-          displayName: user.displayName,
+          displayName: nickName,
           uid: user.uid,
           updateProfile: (args) => user.updateProfile(args),
         });
         setInit(true);
       }
     });
-  }, []);
+  }, [nickName]);
   const refreshUser = () => {
     const user = authService.currentUser;
     setUserObj({
@@ -47,7 +48,7 @@ export default function AppRouter() {
                 <Home userObj={userObj} />
               </Route>
               <Route path="/auth">
-                <Auth userObj={userObj} refreshUser={refreshUser} />
+                <Auth userObj={userObj} setNickName={setNickName} refreshUser={refreshUser} />
               </Route>
               <Route path="/search">
                 <Search />
