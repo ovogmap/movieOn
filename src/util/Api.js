@@ -10,7 +10,6 @@ const api = axios.create({
     language: "ko-KR",
   },
 });
-
 export const YOUTUBE_PATH = 'https://www.youtube.com/watch?v=';
 export const THUMBNAIL_PATH = 'http://i.ytimg.com/vi/';
 export default {
@@ -24,27 +23,18 @@ export default {
   getVideos: (id) => api.get(`${id}/videos`),
   getSimilar: (id) => api.get(`${id}/similar`)
 };
-const getQuery = (path, queries = []) => {
-  let url = `${BASE_URL}${path}?api_key=${API_KEY}&language=${LANGUAGE}&page=1`;
-  // queries.forEach(query => {
-  //   url += `&${query}`;
-  // });
+const getQuery = (path, num = 1) => {
+  let url = `${BASE_URL}${path}?api_key=${API_KEY}&language=${LANGUAGE}&page=${num}`;
   return url;
 };
-export async function fetchData(path) {
-  const url = getQuery(path)
+export async function fetchData(path, num) {
+  const url = getQuery(path, num)
   const result = await axios.get(url)
   return result
 }
-// export const getSearchMovie = () => {
-//  let url = `${BASE_URL}${API_KEY}?api_key=${API_KEY}&language=${LANGUAGE}page=1&include_adult=true`;
-//  const result = axios.get(url)
-//  return result
-// }
-// https://api.themoviedb.org/3/search/movie?api_key=<<api_key>>&language=en-US&page=1&include_adult=false
-export const getSearchMovie = async (item) => {
+export const getSearchMovie = async (query) => {
   const SEARCH_URL = 'https://api.themoviedb.org/3/search/movie'
-  const url = `${SEARCH_URL}?api_key=${API_KEY}&language=${LANGUAGE}&query=${item}&include_adult=false`
+  const url = `${SEARCH_URL}?api_key=${API_KEY}&language=${LANGUAGE}&query=${query}&include_adult=false`
   const result = await axios.get(url)
   return result
 }

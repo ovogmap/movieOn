@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Inner, ItemBox, Items, ItemImg, ItemIntro } from "./ListStyle"
+import { Inner, ItemBox, ItemIntro } from "./ListStyle"
 import ListItems from "./ListItems"
 export default ({ upcoming, popular, topRated }) => {
   return (
@@ -13,14 +13,7 @@ export default ({ upcoming, popular, topRated }) => {
         {upcoming && upcoming.map((item)=>{
           const { title, id, backdrop_path } = item
           // return <ListItems key={id} title={title} id={id} backdrop_path={backdrop_path} />
-          return (
-            <Items key={id}>
-              <Link to={`/detail/${id}`}>
-                <ItemImg src={`https://image.tmdb.org/t/p/original/${backdrop_path}`} alt="사진" />
-                <h4>{title}</h4>
-              </Link>
-            </Items>
-          )
+          return <ListItems title={title} id={id} backdrop_path={backdrop_path} key={id} /> 
         })}
       </ItemBox>
       <ItemIntro>
@@ -30,14 +23,7 @@ export default ({ upcoming, popular, topRated }) => {
       <ItemBox>
         {popular && popular.map((item)=>{
           const { title, id, backdrop_path } = item
-          return (
-            <Items key={id}>
-              <Link to={`/detail/${id}`}>
-                <ItemImg src={`https://image.tmdb.org/t/p/original/${backdrop_path}`} alt="사진" />
-                <h4>{title}</h4>
-              </Link>
-            </Items>
-          )
+          return <ListItems title={title} id={id} backdrop_path={backdrop_path} key={id} />
         })}
       </ItemBox>
       <ItemIntro>
@@ -47,14 +33,7 @@ export default ({ upcoming, popular, topRated }) => {
       <ItemBox>
         {topRated && topRated.map((item)=>{
           const { title, id, backdrop_path } = item
-          return (
-            <Items key={id}>
-              <Link to={`/detail/${id}`}>
-                <ItemImg src={`https://image.tmdb.org/t/p/original/${backdrop_path}`} alt="사진" />
-                <h4>{title}</h4>
-              </Link>
-            </Items>
-          )
+          return <ListItems title={title} id={id} backdrop_path={backdrop_path} key={id} />
         })}
       </ItemBox>
     </Inner>

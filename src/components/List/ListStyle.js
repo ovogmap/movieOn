@@ -9,7 +9,7 @@ const ItemBox = styled.div`
   justify-content: space-between;
   margin-top : 20px;
 `;
-const Items = styled.div`
+const MovieItems = styled.div`
   flex-basis: 24%;
   text-align: center;
   position: relative;
@@ -44,5 +44,15 @@ const ItemIntro = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 50px;
+  span {
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: #e60000;
+    color: #fff;
+    border-radius: 6px;
+    display:inline-block;
+  }
 `;
-export { Inner, ItemBox, Items, ItemImg, ItemIntro }
+export { Inner, ItemBox, MovieItems, ItemImg, ItemIntro }
