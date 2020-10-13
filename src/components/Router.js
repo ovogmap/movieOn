@@ -16,14 +16,15 @@ export const UserContext = React.createContext();
 export default function AppRouter() {
   const [init, setInit] = useState(false);
   const [userObj, setUserObj] = useState(null);
-  const [nickName,setNickName] = useState("");
+  const [nickName,setNickName] = useState(false);
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if (user) {
+        console.log(user)
         setUserObj({
-          displayName: nickName,
+          displayName: user.displayName,
           uid: user.uid,
-          updateProfile: (args) => user.updateProfile(args),
+          updateProfile: (args) =>  user.updateProfile(args),
         });
         setInit(true);
       }

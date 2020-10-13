@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react";
+import { dbService } from "../../fbase";
 import { UserContext } from "../Router";
 import { Intro, PosterImg, ContText, IntroTitle, IntroGenres, IntroLine, IntroTagLine, LikeBtn } from "./DetailStyle"
 export default ({detailMovie, genres}) => {
     const [isLike, setIsLike] = useState(false)
     const user = useContext(UserContext);
     console.log(user)
+    // dbService.collection(`${user.uid}`).add()
     const onLikeToggle = () => {
         setIsLike(!isLike)
     }

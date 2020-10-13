@@ -92,7 +92,7 @@ const MainBox = styled.div`
   // color: #fff;
   // flex-direction: column;
 `;
-export default ({ userObj, refreshUser, setNickName }) => {
+export default ({setNickName}) => {
   const [addUser, setAddUser] = useState({
     email: "",
     password: "",
@@ -111,22 +111,26 @@ export default ({ userObj, refreshUser, setNickName }) => {
   }, []);
   const bg = `url(http://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${movie?.backdrop_path}) center / cover no-repeat`;
   const history = useHistory();
+  const onCreateNickName = async (user) => {
+    await user.user.updateProfile({
+      displayName : addUser.nickName
+    })
+    setNickName(true)
+  }
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
       let data;
-      const { email, password, nickName } = addUser
+      const { email, password } = addUser
       if (newAccount) {
         data = await authService.createUserWithEmailAndPassword(
           email,
           password
         );
-        setNickName(nickName)
+        onCreateNickName(data)
         history.push("/");
-        console.log(data)
       } else {
         data = await authService.signInWithEmailAndPassword(email, password);
-        console.log(data.user.displayName);
         history.push("/");
       }
     } catch (error) {

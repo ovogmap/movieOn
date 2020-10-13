@@ -11,7 +11,7 @@ const Inner = styled.div`
   a {
     padding: 0 20px;
     display : block;
-    margin-top: 30px;
+    margin-top: 20px;
   }
   span {
     margin-left: 40px;
@@ -24,8 +24,7 @@ const IntroTitle = styled.div`
   margin-bottom: 30px;
 `;
 const Input = styled.input`
-  width: 90%;
-  margin: 0 5%;
+  width: 100%;
   height: 50px;
   background: #eee;
   padding: 0 20px;
