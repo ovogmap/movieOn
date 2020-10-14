@@ -2,46 +2,68 @@ import React, { useContext, useEffect, useState } from "react";
 import { Intro, PosterImg, ContText, IntroTitle, IntroGenres, IntroLine, IntroTagLine, LikeBtn } from "./DetailStyle"
 import { LikesList } from "../Router"
 import { dbStore } from "../../fbase";
+import Loading from "../Loading/Loading"
 export default ({detailMovie, genres}) => {
   const like = useContext(LikesList)
-  const { likeList, setLikeList, isLike, setIsLike, userObj } = like
+  const { likeList, setLikeList, userObj, isLoading } = like
+  const [likeState, setLikeState] = useState(false)
   const onAdd = () => {
     const { id, title, poster_path} = detailMovie.data
+    console.log(likeList)
     if(userObj){
+      const reasult = [
+        ...likeList, 
+        {
+          id,
+          title,
+          poster_path
+        }
+      ]
       dbStore.collection("user").doc(`${userObj.uid}`).update({
-        likeList: [
-          ...likeList,
-          {
-            title,
-            id,
-            poster_pathgit 
-          }
-        ]
+        likeList: reasult
       }).then(() => {
         console.log("ok")
       })
+      setLikeList(reasult)
+      setLikeState(true)
     }
-    // setLikeList([
-    //   ...likeList,
-    //   {
-    //     id,
-    //     title,
-    //     poster_path
-    //   }
-    // ])
-    setIsLike(true)
   }
   const onRemove = () => {
+    if(likeList.length !== 0){
     const { id } = detailMovie.data
-    const array = [...likeList]
-    const reasult = array.filter(item => {
-      return item.id !== id
-    })
-    setLikeList(reasult)
-    setIsLike(false)
+      const array = [...likeList]
+      const reasult = array.filter(item => {
+        return item.id !== id
+      })
+      dbStore.collection("user").doc(`${userObj.uid}`).update({
+        likeList: reasult
+      }).then(() => {
+        console.log("remove")
+      })
+      setLikeList(reasult)
+      setLikeState(false)
+    }
   }
-  console.log(likeList)
-  return (
+  useEffect(() => {
+    console.log(userObj)
+    if(userObj) {
+      dbStore.collection("user").doc(`${userObj.uid}`).get()
+      .then(response => {
+        const data = response.data().likeList;
+        console.log(data)
+        const result = data.forEach(item => {
+          console.log(item.id, detailMovie.data.id)
+          if(item.id === detailMovie.data.id){
+            setLikeState(true)
+          }
+        })
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    }
+  },[])
+  return isLoading ? <Loading/> : (
     <Intro>
       <PosterImg
         src={`//image.tmdb.org/t/p/original/${detailMovie.data.poster_path}`}
@@ -50,7 +72,7 @@ export default ({detailMovie, genres}) => {
       <ContText>
         <IntroTitle>{detailMovie.data.title}</IntroTitle>
         <IntroGenres>{genres}</IntroGenres>
-        {isLike ? <LikeBtn onClick={onRemove}>좋아요취소</LikeBtn>
+        {likeState ? <LikeBtn onClick={onRemove}>좋아요취소</LikeBtn>
         : <LikeBtn onClick={onAdd}>좋아요</LikeBtn>
         }
         <IntroLine /> 

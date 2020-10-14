@@ -10,6 +10,7 @@ import Detail from "../routes/Detail";
 import Nav from "./Nav/Nav"
 import { authService, dbStore } from "../fbase";
 import ListMore from "../routes/ListMore";
+import Loading from "./Loading/Loading";
 
 export const UserContext = React.createContext();
 export const LikesList = React.createContext();
@@ -18,30 +19,9 @@ export default function AppRouter() {
   const [init, setInit] = useState(false);
   const [userObj, setUserObj] = useState(null);
   const [nickName,setNickName] = useState(false);
-  const [likeList, setLikeList] = useState([])
-  const [isLike, setIsLike] = useState(false)
-  useEffect(() => {
-    if(userObj) {
-      dbStore.collection("user").doc(`${userObj.uid}`).get()
-      .then(result => {
-        const data = result.data().likeList
-        setLikeList(data)
-        console.log(likeList)
-      })
-      .catch(error => {
-        console.log(error)
-      })
-    }
-  }, [isLike])
-  // useEffect(() => {
-  //   if(userObj){
-  //     dbStore.collection("user").doc(`${userObj.uid}`).update({
-  //       likeList: likeList
-  //     }).then(() => {
-  //       console.log("ok")
-  //     })
-  //   }
-  // },[likeList])
+  const [likeList, setLikeList] = useState([]);
+  const [isLike, setIsLike] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if (user) {
@@ -54,6 +34,22 @@ export default function AppRouter() {
       }
     });
   }, [nickName]);
+  useEffect(() => {
+    setIsLoading(true)
+    console.log(userObj)
+    if(userObj) {
+      dbStore.collection("user").doc(`${userObj.uid}`).get()
+      .then(result => {
+        const data = result.data().likeList
+        console.log(data)
+        setLikeList(data)
+        setIsLoading(false)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    }
+  }, [userObj])
   const refreshUser = () => {
     const user = authService.currentUser;
     setUserObj({
@@ -62,11 +58,10 @@ export default function AppRouter() {
       updateProfile: (args) => user.updateProfile(args),
     });
   };
-  console.log(userObj)
-  return (
+  return isLoading ? <Loading /> : (
     <Router>
       <>
-      <LikesList.Provider value={{likeList, setLikeList, isLike, setIsLike, userObj}}>
+      <LikesList.Provider value={{likeList, setLikeList, isLike, setIsLike, userObj, isLoading}}>
         <Nav init={init} />
         <Switch>
           <>

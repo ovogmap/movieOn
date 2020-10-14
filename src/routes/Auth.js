@@ -122,6 +122,7 @@ export default ({setNickName}) => {
     const result = await dbStore.collection('user').doc(user.user.uid).set({
       displayName: user.user.displayName,
       id: user.user.uid,
+      likeList: []
     })
     console.log(result)
   }
