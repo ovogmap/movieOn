@@ -12,10 +12,6 @@ export default({name}) => {
       setNum((cur) => cur + 1);
     }
   }
-  // const run = async () => {
-  //   const result = await fetchData(name, )
-  //   setOnData(result.data.results)
-  // }
   const onScrollfatchData = async () => {
     const result = await fetchData(name, num)
     const NewArray = result.data.results
@@ -25,8 +21,6 @@ export default({name}) => {
     onScrollfatchData()
     window.addEventListener("scroll", onScroll)
   },[num])
-  // useEffect(() => {
-  // },[num])
 
   return onData && <ListMore onData={onData} name={name} />
 }

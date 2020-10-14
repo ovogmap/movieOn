@@ -22,7 +22,7 @@ export default({ init }) => {
             </Li>
             {init && (
               <Li>
-                <Link to="/like" onClick={()=>{ alert("아직 못만들었어요ㅠ")}}>좋아요리스트</Link>
+                <Link to="/like">좋아요리스트</Link>
               </Li>
             )}
             <Li>

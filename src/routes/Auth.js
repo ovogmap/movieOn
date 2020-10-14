@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { authService, firebaseInstance } from "../fbase";
+import { authService, dbService, dbStore, firebaseInstance } from "../fbase";
 import { useHistory } from "react-router-dom";
 import api from "../util/Api";
 import styled from "styled-components";
@@ -113,9 +113,17 @@ export default ({setNickName}) => {
   const history = useHistory();
   const onCreateNickName = async (user) => {
     await user.user.updateProfile({
-      displayName : addUser.nickName
+      displayName : addUser.nickName,
     })
+    createUser(user)
     setNickName(true)
+  }
+  const createUser = async (user) => {
+    const result = await dbStore.collection('user').doc(user.user.uid).set({
+      displayName: user.user.displayName,
+      id: user.user.uid,
+    })
+    console.log(result)
   }
   const onSubmit = async (e) => {
     e.preventDefault();
