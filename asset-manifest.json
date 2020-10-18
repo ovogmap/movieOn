@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/movieOn/static/css/main.4efb7ca6.chunk.css",
-    "main.js": "/movieOn/static/js/main.b4e4f2dc.chunk.js",
-    "main.js.map": "/movieOn/static/js/main.b4e4f2dc.chunk.js.map",
-    "runtime-main.js": "/movieOn/static/js/runtime-main.4c0025bb.js",
-    "runtime-main.js.map": "/movieOn/static/js/runtime-main.4c0025bb.js.map",
-    "static/js/2.c77a6810.chunk.js": "/movieOn/static/js/2.c77a6810.chunk.js",
-    "static/js/2.c77a6810.chunk.js.map": "/movieOn/static/js/2.c77a6810.chunk.js.map",
-    "index.html": "/movieOn/index.html",
-    "precache-manifest.45380ad3c715fe11cf6dcba9053c570c.js": "/movieOn/precache-manifest.45380ad3c715fe11cf6dcba9053c570c.js",
-    "service-worker.js": "/movieOn/service-worker.js",
-    "static/css/main.4efb7ca6.chunk.css.map": "/movieOn/static/css/main.4efb7ca6.chunk.css.map",
-    "static/js/2.c77a6810.chunk.js.LICENSE.txt": "/movieOn/static/js/2.c77a6810.chunk.js.LICENSE.txt"
+    "main.css": "/movieOn.git/static/css/main.4efb7ca6.chunk.css",
+    "main.js": "/movieOn.git/static/js/main.b4e4f2dc.chunk.js",
+    "main.js.map": "/movieOn.git/static/js/main.b4e4f2dc.chunk.js.map",
+    "runtime-main.js": "/movieOn.git/static/js/runtime-main.13f4f235.js",
+    "runtime-main.js.map": "/movieOn.git/static/js/runtime-main.13f4f235.js.map",
+    "static/js/2.f228a134.chunk.js": "/movieOn.git/static/js/2.f228a134.chunk.js",
+    "static/js/2.f228a134.chunk.js.map": "/movieOn.git/static/js/2.f228a134.chunk.js.map",
+    "index.html": "/movieOn.git/index.html",
+    "precache-manifest.0161f32fdac59e253ebdcb08f29161f8.js": "/movieOn.git/precache-manifest.0161f32fdac59e253ebdcb08f29161f8.js",
+    "service-worker.js": "/movieOn.git/service-worker.js",
+    "static/css/main.4efb7ca6.chunk.css.map": "/movieOn.git/static/css/main.4efb7ca6.chunk.css.map",
+    "static/js/2.f228a134.chunk.js.LICENSE.txt": "/movieOn.git/static/js/2.f228a134.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.4c0025bb.js",
-    "static/js/2.c77a6810.chunk.js",
+    "static/js/runtime-main.13f4f235.js",
+    "static/js/2.f228a134.chunk.js",
     "static/css/main.4efb7ca6.chunk.css",
     "static/js/main.b4e4f2dc.chunk.js"
   ]
