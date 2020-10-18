@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Search from "./Search"
-import { getSearchMovie } from "../../util/Api"
+import { getSearchMovie } from "../../store/api/Api"
 function SearchContainer() {
   const [onSearch, setOnSearch] = useState("")
   const [getQuery, setGetQuery] = useState(null)

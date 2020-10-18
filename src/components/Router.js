@@ -21,7 +21,7 @@ export default function AppRouter() {
   const [nickName,setNickName] = useState(false);
   const [likeList, setLikeList] = useState([]);
   const [isLike, setIsLike] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if (user) {
@@ -58,7 +58,7 @@ export default function AppRouter() {
       updateProfile: (args) => user.updateProfile(args),
     });
   };
-  return isLoading ? <Loading /> : (
+  return (
     <Router>
       <>
       <LikesList.Provider value={{likeList, setLikeList, isLike, setIsLike, userObj, isLoading}}>

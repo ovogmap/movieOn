@@ -5,7 +5,7 @@ import { dbStore } from "../../fbase";
 import Loading from "../Loading/Loading"
 export default ({detailMovie, genres}) => {
   const like = useContext(LikesList)
-  const { likeList, setLikeList, userObj, isLoading } = like
+  const { likeList, setLikeList, userObj } = like
   const [likeState, setLikeState] = useState(false)
   const onAdd = () => {
     const { id, title, poster_path} = detailMovie.data
@@ -63,7 +63,7 @@ export default ({detailMovie, genres}) => {
       })
     }
   },[])
-  return isLoading ? <Loading/> : (
+  return (
     <Intro>
       <PosterImg
         src={`//image.tmdb.org/t/p/original/${detailMovie.data.poster_path}`}

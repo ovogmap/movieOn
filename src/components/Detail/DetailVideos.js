@@ -1,6 +1,6 @@
 import React from "react"
 import {Videosbox, Video} from "./DetailStyle"
-import { YOUTUBE_PATH, THUMBNAIL_PATH } from "../../util/Api"
+import { YOUTUBE_PATH, THUMBNAIL_PATH } from "../../store/api/Api"
 export default ({ id, itemkey }) => {
   return (
     <Videosbox key={id}>

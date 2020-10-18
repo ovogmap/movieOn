@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ListMore from "./ListMore"
-import { fetchData } from "../../util/Api"
+import { fetchData } from "../../store/api/Api"
 export default({name}) => {
   const [onData, setOnData] = useState([])
   const [num, setNum] = useState(1);

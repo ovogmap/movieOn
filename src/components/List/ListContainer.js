@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import List from "./List"
-import api from "../../util/Api"
+import api from "../../store/api/Api"
 export default () => {
   const [upcoming,setUpcoming] = useState(null)
   const [popular,setPopular] = useState(null)

@@ -1,6 +1,6 @@
 import React from "react";
 import Detail from "./Detail";
-import api from "../../util/Api";
+import api from "../../store/api/Api";
 import { useEffect } from "react";
 import { useState } from "react"; 
 
