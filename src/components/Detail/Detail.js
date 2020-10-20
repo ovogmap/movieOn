@@ -5,35 +5,35 @@ import DetailIntro from "./DetailIntro";
 import DetailSimilars from "./DetailSimilars"
 import DetailVideos from "./DetailVideos";
 import { Contentbox, Castsbox, Videosbox, Similarbox, SectionTitle, Inner } from "./DetailStyle"
-export default({ detailMovie, casts, genres, videos, similars }) => {
-  const { backdrop_path, poster_path } = detailMovie.data;
+import { useSelector } from "react-redux";
+export default() => {
+  const { result } = useSelector(state => state.detail)
+  const { backdrop_path, id, poster_path, casts, videos, similars, gens } = result;
   return (
     <>
       <Inner>
         <DetailIntoroBg backdrop_path={backdrop_path} poster_path={poster_path}/>
         <Contentbox>
-          <DetailIntro detailMovie={detailMovie} genres={genres} />
+          <DetailIntro genres={gens} />
           <SectionTitle>출연</SectionTitle>
           <Castsbox>
-            {casts &&
-              casts.map((item) => {
-                const { id, character, name, profile_path } = item;
-                return <DetailCasts key={id} id={id} character={character} name={name} profile_path={profile_path} />;
+            {casts.map((item, i) => {
+                const { character, name, profile_path } = item;
+                return <DetailCasts key={i} id={id} character={character} name={name} profile_path={profile_path} />;
             })}
           </Castsbox>
           <SectionTitle>예고편</SectionTitle>
           <Videosbox>
-            {videos && 
-            videos.map(video => {
-              const { key, id } = video
-              return <DetailVideos key={id} itemkey={key} id={id} />
+            {videos.map((video, i) => {
+              const { key, thumbnail } = video
+              return <DetailVideos key={i} itemkey={key} thumbnail={thumbnail} id={id} />
             })}
           </Videosbox>
           <SectionTitle>비슷한 영화</SectionTitle>
           <Similarbox>
-            {similars && similars.map(similar=> {
+            {similars.map((similar, i)=> {
               const { title, id, poster_path } = similar
-              return <DetailSimilars key={id} title={title} id={id} poster_path={poster_path} />})}
+              return <DetailSimilars key={i} title={title} id={id} poster_path={poster_path} />})}
           </Similarbox>
         </Contentbox>
       </Inner>

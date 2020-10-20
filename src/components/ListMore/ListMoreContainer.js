@@ -9,19 +9,10 @@ export default({name}) => {
   const disPatch = useDispatch()
   console.log(isLoading)
   const [onData, setOnData] = useState([])
-  const [num, setNum] = useState(1);
-  // function onScroll() {
-  //   let sTop = document.documentElement.scrollTop;
-  //   let cTop = document.documentElement.clientHeight;
-  //   let hTop = document.documentElement.scrollHeight;
-  //   if (hTop == sTop + cTop) {
-  //     setNum((cur) => cur + 1);
-  //   }
-  // }
   const onScrollfatchData = async () => {
     disPatch(startLoading())
     try {
-      const result = await fetchData(name, num)
+      const result = await fetchData(name)
       const NewArray = result.data.results
       setOnData([...onData, ...NewArray])
       disPatch(endLoading())
@@ -31,8 +22,7 @@ export default({name}) => {
   }
   useEffect(() => {
     onScrollfatchData()
-    // window.addEventListener("scroll", onScroll)
-  },[num])
+  },[])
 
   return isLoading ? <Loading /> 
   : <>

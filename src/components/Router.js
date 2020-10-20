@@ -8,7 +8,6 @@ import Like from "../routes/Like";
 import Profile from "../routes/Profile";
 import Detail from "../routes/Detail";
 import Nav from "./Nav/Nav"
-import Loading from './Loading/Loading'
 import { authService, dbStore } from "../fbase";
 import ListMore from "../routes/ListMore";
 

@@ -9,7 +9,8 @@ export default () => {
   const disPatch = useDispatch()
   const { upcoming, popular, topRated } = result;
   console.log(result)
-  const getData = async () => {
+  let timer
+  const getMovieList = async () => {
     disPatch(loading())
     console.log('start')
     try {
@@ -19,11 +20,12 @@ export default () => {
       const populars = popular.data.results.splice(0,4)
       const topRated = await api.top_rated()
       const topRateds = topRated.data.results.splice(0,4)
-      disPatch(success({
-        upcoming: upcomings,
-        popular: populars,
-        topRated: topRateds
-      }))
+      timer = setTimeout(()=>{
+        disPatch(success({
+          upcoming: upcomings,
+          popular: populars,
+          topRated: topRateds
+      }))}, 800)
       console.log('success')
     } catch(e) {
       disPatch(error(e))
@@ -31,7 +33,8 @@ export default () => {
     console.log('finish')
   } 
   useEffect(()=>{
-    getData()
+    getMovieList()
+    return () => clearTimeout(timer)
   },[])
   return isLoading ?  <Loading/> : <List upcoming={upcoming} popular={popular} topRated={topRated} />
 }

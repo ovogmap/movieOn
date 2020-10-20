@@ -1,60 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Detail from "./Detail";
-import api from "../../store/api/Api";
-import { useEffect } from "react";
-import { useState } from "react"; 
+import detailApi from '../../store/api/detail'
+import { loading, success, error } from '../../store/modules/detail'
+import { useDispatch, useSelector } from "react-redux";
+import Loading from '../Loading/Loading'
+
 
 export default({ getMoiveId }) => {
-  const [detailMovie, setDetailMovie] = useState(null);
-  const [genres, setGenres] = useState(null);
-  const [casts, setCasts] = useState(null);
-  const [videos, setVideos] = useState(null);
-  const [similars,setSimilars] = useState(null);
-  const fetchDetailMovie = async () => {
-    const result = await api.getDetail(getMoiveId);
-    setDetailMovie(result);
-  };
-  const fetcCredits = async () => {
-    const result = await api.getCredits(getMoiveId);
-    const cast = result.data.cast.splice(0, 5);
-    setCasts(cast);
-  };
-  const fetchvideos = async () => {
-    const result = await api.getVideos(getMoiveId)
-    const video = result.data.results.splice(0, 3)
-    setVideos(video)
-  }
-  const fetchSimilar = async () => {
-    const result = await api.getSimilar(getMoiveId)
-    const similar = result.data.results.splice(0,3)
-    setSimilars(similar)
+  const { isLoading } = useSelector(state=> state.detail)
+  const dispatch = useDispatch()
+  const fetchDetail = async () => {
+    dispatch(loading())
+    try{
+      const result = await detailApi(getMoiveId)
+      dispatch(success(result))
+      console.log(result)
+    } catch(e) {
+      dispatch(error(e))
+    }
   }
   useEffect(() => {
-    fetchDetailMovie();
-    fetcCredits();
-    fetchvideos();
-    fetchSimilar()
+    fetchDetail()
   }, [getMoiveId]);
-
-  const gens = () => {
-    let gens = "";
-    if (detailMovie) {
-      const genreList = detailMovie.data.genres.map((genre) => genre.name);
-      if (detailMovie.data.genres.length > 3) {
-        genreList.splice(3);
-      }
-      gens = genreList.join(" | ");
-    }
-    setGenres(gens);
-  };
-  useEffect(() => {
-    if (detailMovie) {
-      gens();
-    }
-  }, [detailMovie]);
-  return (
-    <>
-      {detailMovie && <Detail detailMovie={detailMovie} casts={casts} similars={similars} videos={videos} genres={genres} />}
-    </>
-  );
+  return isLoading ? <Loading /> : <Detail />
 }

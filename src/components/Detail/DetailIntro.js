@@ -2,13 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { Intro, PosterImg, ContText, IntroTitle, IntroGenres, IntroLine, IntroTagLine, LikeBtn } from "./DetailStyle"
 import { LikesList } from "../Router"
 import { dbStore } from "../../fbase";
-import Loading from "../Loading/Loading"
-export default ({detailMovie, genres}) => {
+import { useSelector } from "react-redux";
+export default () => {
   const like = useContext(LikesList)
   const { likeList, setLikeList, userObj } = like
+  const { result } = useSelector(state => state.detail)
+  const Movie = result
   const [likeState, setLikeState] = useState(false)
   const onAdd = () => {
-    const { id, title, poster_path} = detailMovie.data
+    const { id, title, poster_path} = Movie
     console.log(likeList)
     if(userObj){
       const reasult = [
@@ -30,7 +32,7 @@ export default ({detailMovie, genres}) => {
   }
   const onRemove = () => {
     if(likeList.length !== 0){
-    const { id } = detailMovie.data
+    const { id } = Movie
       const array = [...likeList]
       const reasult = array.filter(item => {
         return item.id !== id
@@ -45,15 +47,14 @@ export default ({detailMovie, genres}) => {
     }
   }
   useEffect(() => {
-    console.log(userObj)
     if(userObj) {
       dbStore.collection("user").doc(`${userObj.uid}`).get()
       .then(response => {
         const data = response.data().likeList;
         console.log(data)
         const result = data.forEach(item => {
-          console.log(item.id, detailMovie.data.id)
-          if(item.id === detailMovie.data.id){
+          console.log(item.id, Movie.id)
+          if(item.id === Movie.id){
             setLikeState(true)
           }
         })
@@ -66,18 +67,18 @@ export default ({detailMovie, genres}) => {
   return (
     <Intro>
       <PosterImg
-        src={`//image.tmdb.org/t/p/original/${detailMovie.data.poster_path}`}
+        src={`${Movie.poster_path}`}
         alt="포스터"
       />
       <ContText>
-        <IntroTitle>{detailMovie.data.title}</IntroTitle>
-        <IntroGenres>{genres}</IntroGenres>
+        <IntroTitle>{Movie.title}</IntroTitle>
+        <IntroGenres>{Movie.genres}</IntroGenres>
         {likeState ? <LikeBtn onClick={onRemove}>좋아요취소</LikeBtn>
         : <LikeBtn onClick={onAdd}>좋아요</LikeBtn>
         }
         <IntroLine /> 
-        <IntroTagLine>{detailMovie.data.tagline}</IntroTagLine>
-        <p>{detailMovie.data.overview}</p>
+        <IntroTagLine>{Movie.tagline}</IntroTagLine>
+        <p>{Movie.overview}</p>
       </ContText>
     </Intro>
   )

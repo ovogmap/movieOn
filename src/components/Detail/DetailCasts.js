@@ -1,10 +1,10 @@
 import React from "react";
 import { CastBox, CastsImg, CastsName, CastsCha } from "./DetailStyle"
-export default ({id, profile_path, name, character}) => {
+export default ({ id, profile_path, name, character }) => {
   return (
     <CastBox key={id}>
       <CastsImg
-      src={`//image.tmdb.org/t/p/original/${profile_path}`}
+      src={`${profile_path}`}
       alt="사진"
       />
       <CastsName>{name}</CastsName>
