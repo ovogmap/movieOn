@@ -6,12 +6,13 @@ import { useSelector } from "react-redux";
 export default () => {
   const like = useContext(LikesList)
   const { likeList, setLikeList, userObj } = like
+  const [likeState, setLikeState] = useState(false)
   const { result } = useSelector(state => state.detail)
   const Movie = result
-  const [likeState, setLikeState] = useState(false)
+  console.log(likeList)
+  console.log(like)
   const onAdd = () => {
     const { id, title, poster_path} = Movie
-    console.log(likeList)
     if(userObj){
       const reasult = [
         ...likeList, 
@@ -32,7 +33,7 @@ export default () => {
   }
   const onRemove = () => {
     if(likeList.length !== 0){
-    const { id } = Movie
+      const { id } = Movie
       const array = [...likeList]
       const reasult = array.filter(item => {
         return item.id !== id
@@ -51,9 +52,7 @@ export default () => {
       dbStore.collection("user").doc(`${userObj.uid}`).get()
       .then(response => {
         const data = response.data().likeList;
-        console.log(data)
-        const result = data.forEach(item => {
-          console.log(item.id, Movie.id)
+        data.forEach(item => {
           if(item.id === Movie.id){
             setLikeState(true)
           }

@@ -17,9 +17,10 @@ export const LikesList = React.createContext();
 export default function AppRouter() {
   const [init, setInit] = useState(false);
   const [userObj, setUserObj] = useState(null);
-  const [nickName,setNickName] = useState(false);
-  const [likeList, setLikeList] = useState([]);
+  const [nickName, setNickName] = useState(false);
+  const [likeList, setLikeList] = useState([{test:1}]);
   const [isLike, setIsLike] = useState(false);
+  console.log(likeList)
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if (user) {
@@ -38,7 +39,6 @@ export default function AppRouter() {
       dbStore.collection("user").doc(`${userObj.uid}`).get()
       .then(result => {
         const data = result.data().likeList
-        console.log(data)
         setLikeList(data)
       })
       .catch(error => {
