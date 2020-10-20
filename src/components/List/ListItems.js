@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { MovieItems, ItemImg } from "./ListStyle"
-export default ({Items, id, title, backdrop_path}) => {
+export default ({id, title, backdrop_path}) => {
   return (
     <MovieItems>
       <Link to={`/detail/${id}`}>

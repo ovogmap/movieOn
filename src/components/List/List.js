@@ -11,8 +11,7 @@ export default ({ upcoming, popular, topRated }) => {
       </ItemIntro>
       <ItemBox>
         {upcoming && upcoming.map((item)=>{
-          const { title, id, backdrop_path } = item
-          // return <ListItems key={id} title={title} id={id} backdrop_path={backdrop_path} />
+          const { title, id, backdrop_path } = item;
           return <ListItems title={title} id={id} backdrop_path={backdrop_path} key={id} /> 
         })}
       </ItemBox>
