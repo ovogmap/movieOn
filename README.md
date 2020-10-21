@@ -77,3 +77,4 @@
 
 <p>기존 hook으로만 관리하던 state에 redux를 적용하면 리팩토링중에 있습니다.</p>
 <p>detail, home, list 리덕스로 리팩토링 완료.</p>
+<p>파비콘 변경 완료.</p>
